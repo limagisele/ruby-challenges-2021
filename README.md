@@ -10,9 +10,9 @@
     2. Pull down the challenge: <br/>
      `git pull upstream <challenge_branch>`
     3. Complete the challenge
-    4. Add and commit your changes.
-      `git add -A`
-      `git commit -m completed-challenge`
+    4. Add and commit your changes. <br/>
+      `git add -A`<br/>
+      `git commit -m completed-challenge`<br/>
     5. Checkout master branch and merge challenge branch:<br/>
     `git checkout master && git merge <challenge_branch>`
     6. Push to master in your fork:<br/>
