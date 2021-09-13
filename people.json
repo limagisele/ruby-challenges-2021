@@ -1,0 +1,79 @@
+[
+  {
+    "id": "1",
+    "email": "john@email.com",
+    "password": "1234",
+    "details": {
+      "name": "John",
+      "age": 25,
+      "hair": "brown"
+    },
+    "role": "Admin"
+  }, 
+  {
+    "id": "2",
+    "email": "paul@email.com",
+    "password": "1234",
+    "details": {
+      "name": "Paul",
+      "age": 17,
+      "hair": "bald"
+    },
+    "role": "User"
+  }, 
+  {
+    "id": "3",
+    "email": "tom@email.com",
+    "password": "1234",
+    "details": {
+      "name": "Tom",
+      "age": 22,
+      "hair": "red"
+    },
+    "role": "Super"
+  }, 
+  {
+    "id": "4",
+    "email": "jared@email.com",
+    "password": "1234",
+    "details": {
+      "name": "Jared",
+      "age": 30,
+      "hair": "brown"
+    },
+    "role": "User"
+  }, 
+  {
+    "id": "5",
+    "email": "John2@email.com",
+    "password": "1234",
+    "details": {
+      "name": "John",
+      "age": 14,
+      "hair": "black"
+    },
+    "role": "User"
+  }, 
+  {
+    "id": "6",
+    "email": "leetgamer69@email.com",
+    "password": "1234",
+    "details": {
+      "name": "Judas",
+      "age": 25,
+      "hair": "brown"
+    },
+    "role": "BANNED"
+  }, 
+  {
+    "id": "7",
+    "email": "leetgamer70@email.com",
+    "password": "1234",
+    "details": {
+      "name": "Samus",
+      "age": 31,
+      "hair": "brown"
+    },
+    "role": "User"
+  }
+]
