@@ -49,8 +49,8 @@ end
 
 def save_to_file(tax)
   f = File.new('tax_file.txt', 'w')
-  f.write("Percentage of income: #{tax[:percentage_of_income].truncate(2)}% \n")
-  f.write("Tax payable: $#{tax[:tax_payable]}")
+  f.puts "Percentage of income: #{tax[:percentage_of_income].truncate(2)}%"
+  f.puts "Tax payable: $#{tax[:tax_payable]}"
   f.close
 end
 
