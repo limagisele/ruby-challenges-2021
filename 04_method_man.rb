@@ -5,25 +5,55 @@
 # Someone has done the ground work but its not very DRY. Using methods, refactor the existing code base.
 
 # BEFORE cleaning up the code, take a moment to run the program to experience and understand what is happening.
+def to_do
+  puts "What would you like to do?"
+end
+
+def input_option 
+  return "Press either 1/2/3/4"
+end
+
+def see(selection)
+  puts "Would you like to see more about one of these #{selection}?"
+end
+
+def disco(list, index)
+    puts "The album #{list[index][:title]} was released in #{list[index][:year]}, with a score of #{list[index][:score]} / 5"
+    puts "The song list of #{list[index][:title]} is:"
+    list[index][:songlist].each { |song| puts song}
+end
+
+def method_man_starred(media, index, list)
+  print "Method Man starred in a #{media} called #{list[index][:title]} in #{list[index][:year]} as #{list[index][:role]}"
+  yield(index, list) if block_given?
+end
+
+def goodbye
+  puts "Thank you for visiting."
+  puts "Have a good day."
+end 
+
 system "clear"
 puts "Welcome to beats by method"
 quit = false
-until quit == true
-  puts "What would you like to do?"
+until quit
+  to_do
   puts "Options: 1. Discography, 2. Filmography, 3. Bio, 4. Exit"
-  puts "Press either 1/2/3"
+  input_option
   input = gets.chomp
   system "clear"
-  if input == "1"
+  case input
+  when "1"
     discography_menu = true
-    while discography_menu == true
+    while discography_menu
       puts "Method Man has studio and collaboritive work."
-      puts "What would you like to do?"
-      puts "Options: 1. Studio, 2. Collaborive, 3. Back, 4. Exit"
-      puts "Press either 1/2/3/4"
+      to_do
+      puts "Options: 1. Studio, 2. Collaboritive, 3. Back, 4. Exit"
+      input_option
       input = gets.chomp
       system "clear"
-      if input == "1"
+      case input
+      when "1"
         # I did the hard work of putting it into a hash for you. You're welcome.
         studio_work = [{
           title: "Tical",
@@ -52,55 +82,29 @@ until quit == true
           score: 4.5
         }]
         albums_menu = true
-        while albums_menu == true
-          puts "Would you like to see more about one of these albums?."
-          puts "What would you like to do?"
+        while albums_menu
+          see("albums")
+          to_do
           puts "Options: 1. Tical, 2. Tical 2000: Judgement Day, 3. Tical 0: The Prequel, 4. 4:21... The Day After, 5. The Meth Lab, 6. Back, 7. Exit"
-          puts "Press either 1/2/3/4/5/6/7"
+          puts input_option + "/5/6/7"
           input = gets.chomp
           system "clear"
-          if input == "1"
-            puts "The album Tical was released in 1994, with a score of 4.5 / 5"
-            puts "The song list of Tical is:"
-            puts "Tical"
-            puts "Biscuits"
-            puts "Bring the Pain"
-          elsif input == "2"
-            puts "The album Tical 2000: Judgement Day was released in 1994, with a score of 3 / 5"
-            puts "The song list of Tical 2000: Judgement Day is:"
-            puts "Judgement Day (Intro)"
-            puts "Perfect World"
-            puts "Cradle Rock"
-          elsif input == "3"
-            puts "The album Tical 0: The Prequel was released in 1994, with a score of 4.5 / 5"
-            puts "The song list of Tical 0: The Prequel is:"
-            puts "The Prequel"
-            puts "Say What"
-            puts "What's Happenin'"
-          elsif input == "4"
-            puts "The album 4:21... The Day After was released in 1994, with a score of 4 / 5"
-            puts "The song list of 4:21... The Day After is:"
-            puts "The Meth Lab"
-            puts "Is It Me"
-            puts "Problem"
-          elsif input == "5"
-            puts "The album The Meth Lab was released in 1994, with a score of 4.5 / 5"
-            puts "The song list of The Meth Lab is:"
-            puts "The Meth Lab"
-            puts "Straight Gutta"
-            puts "Bang Zoom"
-          elsif input == "6"
+          index = input.to_i - 1
+          case input
+          when "1", "2", "3", "4", "5"
+            disco(studio_work, index)
+          when "6"
             albums_menu = false
-          elsif input == "7"
+          when "7"
             discography_menu = false
             albums_menu = false
             quit = true
           end
         end
-      elsif input == "2"
+      when "2"
         # I did the hard work of putting it into a hash for you. You're welcome.
         collab_menu = true
-        while collab_menu == true
+        while collab_menu
           collab_work = [{
             title: "Blackout!",
             year: 1999,
@@ -122,66 +126,47 @@ until quit == true
             songlist: ["Criminology 2.5", "Meth vs. Chef 2", "Smooth Sailing"],
             score: 4
           }]
-          puts "Would you like to see more about one of these albums?."
-          puts "What would you like to do?"
+          see("albums")
+          to_do
           puts "Options: 1. Blackout!, 2. How High, 3. Blackout! 2, 4. Wu-Massacre, 5. Back, 6. Exit"
-          puts "Press either 1/2/3/4/5/6"
+          puts input_option + "/5/6"
           input = gets.chomp
           system "clear"
-          if input == "1"
-            puts "The album Blackout! was released in 1999, with a score of 4.5 / 5"
-            puts "The song list of Blackout! is:"
-            puts "A Special Joint"
-            puts "Blackout"
-            puts "Mi Casa"
-          elsif input == "2"
-            puts "The album How High was released in 2001, with a score of 4.5 / 5"
-            puts "The song list of How High! is:"
-            puts "Part II"
-            puts "Round and Round (Remix)"
-            puts "Cisco Kid"
-          elsif input == "3"
-            puts "The album Blackout! 2 was released in 2009, with a score of 4.5 / 5"
-            puts "The song list of Blackout! 2 is:"
-            puts "I'm Dope"
-            puts "BO"
-            puts "A-Yo"
-          elsif input == "4"
-            puts "The album Wu-Massacre was released in 2010, with a score of 4.5 / 5"
-            puts "The song list of Wu-Massacre is:"
-            puts "Criminology 2.5"
-            puts "Meth vs. Chef 2"
-            puts "Smooth Sailing"
-          elsif input == "5"
+          index = input.to_i - 1
+          case input
+          when "1", "2", "3", "4"
+            disco(collab_work, index)
+          when "5"
             collab_menu = false
-          elsif input == "6"
+          when "6"
             collab_menu = false
             discography_menu = false
             quit = true
           end
         end
-      elsif input == "3"
+      when "3"
         discography_menu = false
-      elsif input == "4"
+      when "4"
         quit = true
       end
     end
-  elsif input == "2"
+  when "2"
     acting_menu = true
-    while acting_menu == true
+    while acting_menu
       system "clear"
       puts "Method Man has been in movies and television ."
-      puts "What would you like to do?"
+      to_do
       puts "Options: 1. Movies, 2. Television, 3. Back, 4. Exit"
-      puts "Press either 1/2/3/4"
+      puts input_option
       input = gets.chomp
       system "clear"
-      if input == "1"
+      case input
+      when "1"
         # I did the hard work of putting it into a hash for you. You're welcome.
         film_list = [{
           title: "The Film",
-          role: 1995,
-          year: "Himself"
+          role: "Himself",
+          year: 1995
         }, {
           title: "The Great White Hype",
           role: "Himself",
@@ -196,30 +181,26 @@ until quit == true
           year: 1997
         }]
         film_menu = true
-        while film_menu == true
-          puts "Would you like to see more about one of these movies?."
-          puts "What would you like to do?"
+        while film_menu
+          see("movies")
+          to_do
           puts "Options: 1. The Film, 2. The Great White Hype, 3. Cop Land, 4. One Eight Seven, 5. Back, 6. Exit"
-          puts "Press either 1/2/3/4/5/6"
+          puts input_option + "/5/6"
           input = gets.chomp
+          index = input.to_i - 1
           system "clear"
-          if input == "1"
-            puts "Method Man starred in a movie called 'The Film' in 1995 as Himself"
-          elsif input == "2"
-            puts "Method Man starred in a movie called 'The Great White Hype' in 1996 as Himself"
-          elsif input == "3"
-            puts "Method Man starred in a movie called 'Cop Land' in 1997 as Shondel"
-          elsif input == "4"
-            puts "Method Man starred in a movie called 'One Eight Seven' in 1997 as Dennis Broadway"
-          elsif input == "5"
+          puts case input
+          when "1", "2", "3", "4"
+            method_man_starred("movie", index, film_list)
+          when "5"
             film_menu = false
-          elsif input == "6"
+          when "6"
             acting_menu = false
             film_menu = false
             quit = true
           end
         end
-      elsif input == "2"
+      when "2"
         television_list = [{
           title: "Space Ghost Coast to Coast",
           episode: "Surprise",
@@ -242,44 +223,39 @@ until quit == true
           year: 2001
         }]
         television_menu = true
-        while television_menu == true
-          puts "Would you like to see more about one of these shows?."
-          puts "What would you like to do?"
+        while television_menu
+          see("shows")
+          to_do
           puts "Options: 1. Space Ghost Coast to Coast, 2. Martin, 3. Station Zero, 4. Oz, 5. Back, 6. Exit"
-          puts "Press either 1/2/3/4/5/6"
+          puts input_option + "/5/6"
           input = gets.chomp
           system "clear"
-          if input == "1"
-            puts "Method Man starred in a television show called 'Space Ghost Coast to Coast' in 1996 as Himself on episode 'Surprise'"
-          elsif input == "2"
-            puts "Method Man starred in a television show called 'Martin' in 1997 as Robber: M-E-T-H-O-D Man on episode 'You Play Too Much'"
-          elsif input == "3"
-            puts "Method Man starred in a television show called 'Station Zero' in 1995 as Himself on episode 'Uptown, Baby'"
-          elsif input == "4"
-            puts "Method Man starred in a television show called 'Oz' in 1995 as Himself on episode 'Tug Daniels'"
-          elsif input == "5"
+          index = input.to_i - 1
+          case input
+          when "1", "2", "3", "4"
+            method_man_starred("television show", index, television_list) { |i, list| puts " on episode #{list[i][:episode]}" }
+          when "5"
             television_menu = false
-          elsif input == "6"
+          when "6"
             television_menu = false
             acting_menu = false
             quit = true
           end
         end
-      elsif input == "3"
-        filmography_menu = false
-      elsif input == "4"
-        filmography_menu = false
+      when "3"
+        acting_menu = false
+      when "4"
+        acting_menu = false
         quit = true
       end
     end
-  elsif input == "3"
+  when "3"
     system "clear"
     puts "Clifford Smith Jr. (born March 2, 1971),[2] better known by his stage name Method Man, is an American rapper, songwriter, record producer and actor. He is known as a member of the East Coast hip hop collective Wu-Tang Clan. He is also one half of the hip hop duo Method Man & Redman. He took his stage name from the 1979 film Method Man.[3] In 1996, Smith won a Grammy Award for Best Rap Performance by a Duo or Group, for 'I\'ll Be There for You/You're All I Need to Get By', featuring American R&B singer Mary J. Blige who he currently stars with in Power Book II: Ghost, a spin-off of its original show Power."
     puts "Smith has appeared in films such as 187 (1997), Belly (1998), How High (2001), Garden State (2004), The Wackness (2008), Venom (2005), Red Tails (2012), Keanu (2016), and The Cobbler (2014). On television, he and frequent collaborator, fellow East Coast rapper Redman, co-starred on the short-lived Fox sitcom Method & Red. He has also had recurring roles in three HBO series, as Tug Daniels in Oz, Melvin 'Cheese' Wagstaff in The Wire, and Rodney in The Deuce.[4] Method Man also appears in the TBS comedy The Last O.G.. "
-  elsif input == "4"
+  when "4"
     quit = true
   end
 end
 
-puts "Thank you for visiting."
-puts "Have a good day."
+goodbye
