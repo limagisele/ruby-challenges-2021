@@ -22,36 +22,29 @@
 # their percentage_of_income and their tax_payable in an easy to read format.
 
 def calculate_tax_payable(income)
-  tax = { percentage_of_income: 0, tax_payable: 0 }
+  tax = { percentage_of_income: "", tax_payable: "" }
   case income
   when 0..18_200
-    tax[:percentage_of_income] = 0
     tax[:tax_payable] = 0
-    tax
   when 18_201..37_000
     tax[:tax_payable] = (income - 18_200) * 0.19
-    tax[:percentage_of_income] = (tax[:tax_payable] / income) * 100
-    tax
   when 37_001..87_000
-    tax[:tax_payable] = 3572 + (income - 37_000) * 0.325
-    tax[:percentage_of_income] = (tax[:tax_payable] / income) * 100
-    tax
+    tax[:tax_payable] = 3572 + ((income - 37_000) * 0.325)
   when 87_001..180_000
-    tax[:tax_payable] = 19_822 + (income - 87_000) * 0.37
-    tax[:percentage_of_income] = (tax[:tax_payable] / income) * 100
-    tax
+    tax[:tax_payable] = 19_822 + ((income - 87_000) * 0.37)
   else
-    tax[:tax_payable] = 54_232 + (income - 180_000) * 0.45
-    tax[:percentage_of_income] = (tax[:tax_payable] / income) * 100
-    tax
+    tax[:tax_payable] = 54_232 + ((income - 180_000) * 0.45)
   end
+  tax[:percentage_of_income] = (tax[:tax_payable] / income) * 100
+  return tax
 end
 
-def save_to_file(tax)
+def save_to_file(name, tax)
   f = File.new('tax_file.txt', 'w')
+  f.puts name.capitalize
   f.puts "Percentage of income: #{tax[:percentage_of_income].truncate(2)}%"
   f.puts "Tax payable: $#{tax[:tax_payable]}"
   f.close
 end
 
-save_to_file(calculate_tax_payable(180_000))
+save_to_file("mary", calculate_tax_payable(18_000))

@@ -1,2 +1,3 @@
-Percentage of income: 30.12%
-Tax payable: $54232.0
+Mary
+Percentage of income: 0%
+Tax payable: $0
