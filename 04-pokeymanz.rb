@@ -84,7 +84,7 @@ class Pokeymans
                 @health -= 10
                 @happiness -= 25
             end
-            @experience += 0.5
+            @experience += 0.2
             if @experience > 5
                 @level += 1
                 @health += 1
@@ -124,16 +124,17 @@ class Pokeymans
     def self.catch(name)
         if @@caught_pokeymans.length < 6
             @@caught_pokeymans << Pokeymans.new(name)
+            puts "You now have #{Pokeymans.caught_pokeymans.length} pokeymans!"
         else
             puts "You already got 6 pokeymans!!"
         end
     end
 
     def fight
-        @experience += 10
+        @experience += 2.5
         @health -= 5 * rand(0..5)
-        if @experience > 10
-            @level += 2
+        if @experience > 5
+            @level += 1
             @experience = 0
         end
         if @hunger > 80
@@ -147,7 +148,6 @@ class Pokeymans
 end
 
 Pokeymans.catch("Larry")
-Pokeymans.catch("unamed")
 
 continue = true
 while continue
@@ -183,7 +183,6 @@ while continue
             when "2"
                 system "clear"
                 Pokeymans.catch("Unnamed Pokeymans")
-                puts "You now have #{Pokeymans.caught_pokeymans.length - 1} pokeymans!"
             else
                 next
             end
